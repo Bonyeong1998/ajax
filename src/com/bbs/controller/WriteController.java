@@ -1,0 +1,39 @@
+package com.bbs.controller;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.bbs.model.BoardDao;
+import com.bbs.model.BoardDto;
+
+@WebServlet(value={"/write.do"})
+public class WriteController extends HttpServlet {
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		RequestDispatcher rd=req.getRequestDispatcher("write.jsp");
+		rd.forward(req, resp);
+	}
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		String title=req.getParameter("title");
+		String content=req.getParameter("content");
+		String writer= (String) req.getSession().getAttribute("nickname");
+		BoardDao dao=new BoardDao();
+		try {
+			dao.saveBbs(writer, title, content);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		resp.sendRedirect("index.do");
+	}
+	
+}
