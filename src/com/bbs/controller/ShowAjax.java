@@ -19,6 +19,8 @@ public class ShowAjax extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setCharacterEncoding("utf-8");
+	      resp.setHeader("Access-Control-Allow-Origin", "*");
+	      resp.setHeader("Access-Control-Allow-Credentials", "true");
 		int idx=Integer.parseInt(req.getParameter("idx"));
 		PrintWriter out = resp.getWriter();
 		BoardDto bean=null;

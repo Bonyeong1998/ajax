@@ -20,6 +20,8 @@ public class MyAjax extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setCharacterEncoding("UTF-8");
+	      resp.setHeader("Access-Control-Allow-Origin", "*");
+	      resp.setHeader("Access-Control-Allow-Credentials", "true");
 		String writer= (String) req.getSession().getAttribute("nickname");
 		System.out.println(writer);
 		PrintWriter out = resp.getWriter();
