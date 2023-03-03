@@ -103,7 +103,7 @@ var idx=urlParams.get('idx');
 $(document).ready(function() {
 	$.ajax({
 		type : 'GET',
-		url : 'http://localhost:8080/bbs/ajax/edit',
+		url : 'http://192.168.99.100:8080/bbs/ajax/edit',
 		data : {"idx" : idx},
 		success : function(result) {
 			$('#edit').html(result);
